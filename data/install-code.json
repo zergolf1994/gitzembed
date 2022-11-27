@@ -5,8 +5,8 @@
         "desc": "ดาวน์โหลดไฟล์ต้นฉบับจาก Google Drive",
         "version": "1.0.0",
         "gauth": true,
-        "install": "i",
-        "update": "i"
+        "install": "wget -q https://[DOMAIN_API]/install/download/install.sh\nchmod +x install.sh\nsudo bash install.sh",
+        "update": "wget -q https://[DOMAIN_API]/install/download/update.sh\nchmod +x install.sh\nsudo bash update.sh"
     },
     {
         "id": 2,
@@ -14,8 +14,8 @@
         "desc": "ดาวน์โหลดไฟล์จาก Google Drive\nตามความละเอียดที่ประมวลผล",
         "version": "1.0.0",
         "gauth": true,
-        "install": "i",
-        "update": "i"
+        "install": "wget -q https://[DOMAIN_API]/install/dlv2/install.sh\nchmod +x install.sh\nsudo bash install.sh",
+        "update": "wget -q https://[DOMAIN_API]/install/dlv2/update.sh\nchmod +x install.sh\nsudo bash update.sh"
     },
     {
         "id": 3,
@@ -23,8 +23,8 @@
         "desc": "",
         "version": "1.0.0",
         "gauth": true,
-        "install": "i",
-        "update": "i"
+        "install": "wget -q https://[DOMAIN_API]/install/storage/install.sh\nchmod +x install.sh\nsudo bash install.sh",
+        "update": "wget -q https://[DOMAIN_API]/install/storage/update.sh\nchmod +x install.sh\nsudo bash update.sh"
     },
     {
         "id": 4,
@@ -32,8 +32,8 @@
         "desc": "",
         "version": "1.0.0",
         "gauth": true,
-        "install": "i",
-        "update": "i"
+        "install": "wget -q https://[DOMAIN_API]/install/stream/install.sh\nchmod +x install.sh\nsudo bash install.sh",
+        "update": "wget -q https://[DOMAIN_API]/install/stream/update.sh\nchmod +x install.sh\nsudo bash update.sh"
     },
     {
         "id": 5,
@@ -41,8 +41,8 @@
         "desc": "",
         "version": "1.0.0",
         "gauth": true,
-        "install": "i",
-        "update": "i"
+        "install": "wget -q https://[DOMAIN_API]/install/players/install.sh\nchmod +x install.sh\nsudo bash install.sh",
+        "update": "wget -q https://[DOMAIN_API]/install/players/update.sh\nchmod +x install.sh\nsudo bash update.sh"
     },
     {
         "id": 6,
@@ -50,7 +50,7 @@
         "desc": "",
         "version": "1.0.0",
         "gauth": true,
-        "install": "i",
-        "update": "i"
+        "install": "wget -q https://[DOMAIN_API]/install/thumbnails/install.sh\nchmod +x install.sh\nsudo bash install.sh",
+        "update": "wget -q https://[DOMAIN_API]/install/thumbnails/update.sh\nchmod +x install.sh\nsudo bash update.sh"
     }
 ]
