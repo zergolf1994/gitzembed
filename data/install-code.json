@@ -1,0 +1,28 @@
+[
+    {
+        "id": 1,
+        "title": "ดาวน์โหลด",
+        "desc": "ดาวน์โหลดไฟล์ต้นฉบับจาก Google Drive",
+        "version": "1",
+        "gauth": true,
+        "button": [
+            {
+                "install": "i",
+                "update": "u"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "ดาวน์โหลด V2",
+        "desc": "ดาวน์โหลดไฟล์จาก Google Drive\nตามความละเอียดที่ประมวลผล",
+        "version": "2",
+        "gauth": true,
+        "code": [
+            {
+                "install": "i",
+                "update": "u"
+            }
+        ]
+    }
+]
