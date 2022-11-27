@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "title": "ดาวน์โหลด ไฟล์ต้นฉบับ",
+        "title": "download_v1",
         "desc": "ดาวน์โหลดไฟล์ต้นฉบับจาก Google Drive",
         "version": "1.0.0",
         "gauth": true,
@@ -10,7 +10,7 @@
     },
     {
         "id": 2,
-        "title": "ดาวน์โหลด ความละเอียด",
+        "title": "download_v2",
         "desc": "ดาวน์โหลดไฟล์จาก Google Drive\nตามความละเอียดที่ประมวลผล",
         "version": "1.0.0",
         "gauth": true,
@@ -19,7 +19,7 @@
     },
     {
         "id": 3,
-        "title": "เก็บไฟล์",
+        "title": "storage",
         "desc": "",
         "version": "1.0.0",
         "gauth": true,
@@ -28,7 +28,7 @@
     },
     {
         "id": 4,
-        "title": "สตรีม",
+        "title": "stream",
         "desc": "",
         "version": "1.0.0",
         "gauth": true,
@@ -37,7 +37,16 @@
     },
     {
         "id": 5,
-        "title": "ตัวเล่น",
+        "title": "players",
+        "desc": "",
+        "version": "1.0.0",
+        "gauth": true,
+        "install": "i",
+        "update": "i"
+    },
+    {
+        "id": 6,
+        "title": "thumbnails",
         "desc": "",
         "version": "1.0.0",
         "gauth": true,
