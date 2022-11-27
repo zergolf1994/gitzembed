@@ -1,28 +1,47 @@
 [
     {
         "id": 1,
-        "title": "ดาวน์โหลด",
+        "title": "ดาวน์โหลด ไฟล์ต้นฉบับ",
         "desc": "ดาวน์โหลดไฟล์ต้นฉบับจาก Google Drive",
-        "version": "1",
+        "version": "1.0.0",
         "gauth": true,
-        "button": [
-            {
-                "install": "i",
-                "update": "u"
-            }
-        ]
+        "install": "i",
+        "update": "i"
     },
     {
         "id": 2,
-        "title": "ดาวน์โหลด V2",
+        "title": "ดาวน์โหลด ความละเอียด",
         "desc": "ดาวน์โหลดไฟล์จาก Google Drive\nตามความละเอียดที่ประมวลผล",
-        "version": "2",
+        "version": "1.0.0",
         "gauth": true,
-        "code": [
-            {
-                "install": "i",
-                "update": "u"
-            }
-        ]
+        "install": "i",
+        "update": "i"
+    },
+    {
+        "id": 3,
+        "title": "เก็บไฟล์",
+        "desc": "",
+        "version": "1.0.0",
+        "gauth": true,
+        "install": "i",
+        "update": "i"
+    },
+    {
+        "id": 4,
+        "title": "สตรีม",
+        "desc": "",
+        "version": "1.0.0",
+        "gauth": true,
+        "install": "i",
+        "update": "i"
+    },
+    {
+        "id": 5,
+        "title": "ตัวเล่น",
+        "desc": "",
+        "version": "1.0.0",
+        "gauth": true,
+        "install": "i",
+        "update": "i"
     }
 ]
