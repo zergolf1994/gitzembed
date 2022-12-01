@@ -1,4 +1,4 @@
-pm2 delete all
+pm2 delete server-storage
 rm -rf /home/node/
 wget https://github.com/zergolf1994/node-storage/archive/refs/heads/master.zip -O /home/storage.zip
 cd /home && unzip storage.zip && rm -rf /home/storage.zip && cd
