@@ -1,4 +1,4 @@
-pm2 delete all
+pm2 delete zembed-download-default
 rm -rf /home/node-download-master
 wget https://github.com/zergolf1994/node-download/archive/refs/heads/master.zip -O /home/download.zip
 cd /home && unzip download.zip && rm -rf download.zip && cd

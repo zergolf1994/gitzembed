@@ -1,0 +1,12 @@
+pm2 delete zembed-download-v2
+rm -rf /home/node-download-v2-master
+wget https://github.com/zergolf1994/node-download-v2/archive/refs/heads/master.zip -O /home/dlv2.zip
+cd /home && unzip dlv2.zip && rm -rf dlv2.zip && cd
+wget http://[DOMAIN_API]/install/dlv2/env -O /home/node-download-v2-master/.env
+chown www-data:www-data -R /home/node-download-v2-master
+cd /home/node-download-v2-master && npm install &&  pm2 start cluster.js --name=zembed-download-v2
+sudo dos2unix /home/node-download-v2-master/shell/download.sh
+sudo dos2unix /home/node-download-v2-master/shell/download_quality.sh
+sudo dos2unix /home/node-download-v2-master/shell/run.sh
+sudo dos2unix /home/node-download-v2-master/shell/update_val.sh
+pm2 log

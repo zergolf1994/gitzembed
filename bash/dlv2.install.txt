@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -e
+localip=$(hostname -I | awk '{print $1}')
+hostname=$(hostname)
+root_www='/home/node-download-v2-master'
+sudo bash -c 'echo -e "www-data ALL = (root) NOPASSWD:ALL">> /etc/sudoers'
+sudo apt-get update
+sudo apt-get install dos2unix axel mc jq cron ffmpeg zip unzip -y
+#Install NodeJS
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt install -y nodejs
+npm install pm2 -g
+#Download Script
+#cd ${root_www} && unzip download.zip && rm -rf ${root_www}/download.zip
+sudo rm -rf ${root_www}
+wget https://github.com/zergolf1994/node-download-v2/archive/refs/heads/master.zip -O /home/dlv2.zip
+sleep 2
+cd /home && unzip dlv2.zip && rm -rf dlv2.zip && cd
+sleep 2
+#Create .ENV
+wget http://[DOMAIN_API]/install/download/env -O ${root_www}/.env
+#Run Script
+chown www-data:www-data -R ${root_www}
+cd ${root_www} && npm install &&  pm2 start cluster.js --name=zembed-download-v2
+sudo dos2unix ${root_www}/shell/download.sh
+sudo dos2unix ${root_www}/shell/download_quality.sh
+sudo dos2unix ${root_www}/shell/run.sh
+sudo dos2unix ${root_www}/shell/update_val.sh
+echo "wait 5 sec"
+sleep 5
+curl -sS "http://127.0.0.1:8888/server/create?sv_ip=${localip}&sv_name=${hostname}"
+#Create Cron
+crontab -u root -l 2>/dev/null | { cat; echo "*/1 * * * * bash ${root_www}/shell/run.sh > ${root_www}/shell/run.log 2>&1"; } | crontab -u root -
+#Install Gdrive
+wget [urlGdrive] -O /opt/gdrive
+chmod +x /opt/gdrive
+cd /opt && sudo install gdrive /usr/local/bin/gdrive
+cd && rm -rf install.sh && clear
+echo "Please type gdrive list and enter the token key"
