@@ -29,7 +29,7 @@ curl -sS "http://127.0.0.1:8888/server/create?sv_ip=${localip}&sv_name=${hostnam
 #Create Cron
 crontab -u root -l 2>/dev/null | { cat; echo "*/1 * * * * bash ${root_www}/shell/run.sh > ${root_www}/shell/run.log 2>&1"; } | crontab -u root -
 #Install Gdrive
-wget http://[DOMAIN_API]/gdrive -O /opt/gdrive
+wget [urlGdrive] -O /opt/gdrive
 chmod +x /opt/gdrive
 cd /opt && sudo install gdrive /usr/local/bin/gdrive
 cd && rm -rf install.sh && clear
