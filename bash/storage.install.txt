@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+set -e
+localip=$(hostname -I | awk '{print $1}')
+hostname=$(hostname)
+root_www='/home/node'
+sudo bash -c 'echo -e "www-data ALL = (root) NOPASSWD:ALL">> /etc/sudoers'
+sudo apt-get update
+sudo apt-get install dos2unix axel mc jq cron ffmpeg zip unzip -y
+#Install NodeJS
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt install -y nodejs
+npm install pm2 -g
+#Download Script
+#mkdir -p ${root_www}
+wget https://github.com/zergolf1994/node-storage/archive/refs/heads/master.zip -O /home/storage.zip
+sleep 2
+cd /home && unzip storage.zip && rm -rf /home/storage.zip && cd
+sleep 2
+cd /home &&  mv node-storage-master node
+#Create .ENV
+wget http://[DOMAIN_API]/install/storage/env -O ${root_www}/.env
+#Run Script
+cd ${root_www} && npm install &&  pm2 start cluster.js --name=server-storage
+sudo dos2unix ${root_www}/shell/download.sh
+sudo dos2unix ${root_www}/shell/run.sh
+sudo dos2unix ${root_www}/shell/update-disk.sh
+echo "wait 5 sec"
+sleep 5
+curl -sS "http://127.0.0.1:8888/server/create?sv_ip=${localip}&sv_name=${hostname}"
+#Create Cron
+crontab -u root -l 2>/dev/null | { cat; echo "*/1 * * * * bash ${root_www}/shell/run.sh > ${root_www}/shell/run.log 2>&1"; } | crontab -u root -
+#Install Gdrive
+wget [urlGdrive] -O /opt/gdrive
+chmod +x /opt/gdrive
+cd /opt && sudo install gdrive /usr/local/bin/gdrive
+#install nginx-vod
+sudo apt install curl build-essential libssl-dev zlib1g-dev linux-generic linux-headers-$(uname -r) libpcre3 libpcre3-dev libavcodec-dev libavformat-dev libswscale-dev libgd-dev libxml2 libxml2-dev uuid-dev -y
+mkdir /opt/nginx /opt/nginx-vod-module
+curl -sL https://github.com/zergolf1994/gitzembed/raw/master/programe/nginx-1.16.1.tar.gz | tar -C /opt/nginx --strip 1 -xz
+curl -sL https://github.com/zergolf1994/gitzembed/raw/master/programe/nginx-vod-module.tar.gz | tar -C /opt/nginx-vod-module --strip 1 -xz
+cd /opt/nginx
+./configure --prefix=/usr/local/nginx --add-module=../nginx-vod-module --with-http_ssl_module --with-file-aio --with-threads --with-cc-opt="-O3" --without-http_rewrite_module
+sudo make
+sudo make install
+sudo rm -rf /usr/local/nginx/html /usr/local/nginx/conf/*.default
+#Create nginx.conf
+wget https://github.com/zergolf1994/gitzembed/raw/master/programe/nginx -O /usr/local/nginx/conf/nginx.conf
+sudo /usr/local/nginx/sbin/nginx
+#/usr/local/nginx/sbin/nginx -s reload
+bash ${root_www}/shell/updatedisk.sh > /dev/null &
+cd && rm -rf install.sh && clear
+echo "Please type gdrive list and enter the token key"

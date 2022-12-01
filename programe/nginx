@@ -1,0 +1,124 @@
+worker_processes  auto;
+#user root;
+#pid /usr/local/nginx/logs/nginx.pid;
+#error_log  /usr/local/nginx/logs/error1.log;
+#error_log  /usr/local/nginx/logs/error2.log  notice;
+#error_log  /usr/local/nginx/logs/error3.log  info;
+#error_log  /usr/local/nginx/logs/debug.log  debug;
+
+events {
+    worker_connections  1024;
+    worker_aio_requests 512;
+    use epoll;
+}
+
+http {
+    log_format  main  '$remote_addr $remote_user [$time_local] "$request" '
+        '$status "$http_referer" "$http_user_agent"';
+
+    #access_log  /home/ubuntu/nginx.log  main;
+    #error_log   stderr debug;
+
+    default_type  application/octet-stream;
+    include       /usr/local/nginx/conf/mime.types;
+
+    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay on;
+
+    keepalive_timeout 60;
+    keepalive_requests 1000;
+    client_header_timeout 20;
+    client_body_timeout 20;
+    reset_timedout_connection on;
+    send_timeout 20;
+
+    # manifest compression
+    gzip on;
+    gzip_types application/vnd.apple.mpegurl video/f4m application/dash+xml text/xml text/vtt;
+    gzip_proxied any;
+
+    # shared memory zones
+    vod_metadata_cache metadata_cache 128m;
+    vod_response_cache response_cache 64m;
+    vod_performance_counters perf_counters;
+
+    # common vod settings
+    vod_last_modified 'Sun, 19 Nov 2000 08:52:00 GMT';
+    vod_last_modified_types *;
+    vod_align_segments_to_key_frames on;
+    vod_output_buffer_pool 64k 32;
+
+    #vod_mode                           local;
+    #vod_metadata_cache                 metadata_cache 32m;
+    #vod_response_cache                 response_cache 128m;
+    #vod_last_modified 'Sun, 19 Nov 2000 08:52:00 GMT';
+    #vod_last_modified_types            *;
+    #vod_segment_duration               4000;
+    #vod_dash_fragment_file_name_prefix "segment";
+    #vod_hls_segment_file_name_prefix   "segment";
+
+    vod_segment_duration 2000;
+    vod_manifest_segment_durations_mode accurate;
+
+    #open_file_cache          max=1000 inactive=5m;
+    #open_file_cache_valid    2m;
+    #open_file_cache_min_uses 1;
+    #open_file_cache_errors   on;
+
+
+    aio on;
+
+    server {
+        listen 8889;
+        server_name _;
+        root /home/files/;
+        index index.php index.html index.htm;
+
+        add_header Access-Control-Allow-Headers '*';
+        add_header Access-Control-Expose-Headers 'Server,range,Content-Length,Content-Range';
+        add_header Access-Control-Allow-Methods 'GET, HEAD, OPTIONS';
+        add_header Access-Control-Allow-Origin '*';
+
+        location /dash/ {
+            vod dash;
+            alias /home/files/;
+
+            add_header Access-Control-Allow-Headers '*';
+            add_header Access-Control-Expose-Headers 'Server,range,Content-Length,Content-Range';
+            add_header Access-Control-Allow-Methods 'GET, HEAD, OPTIONS';
+            add_header Access-Control-Allow-Origin '*';
+
+        }
+
+        location /hls/ {
+            vod hls;
+            alias /home/files/;
+
+            add_header Access-Control-Allow-Headers '*';
+            add_header Access-Control-Expose-Headers 'Server,range,Content-Length,Content-Range';
+            add_header Access-Control-Allow-Methods 'GET, HEAD, OPTIONS';
+            add_header Access-Control-Allow-Origin '*';
+
+            expires 365d;
+
+        }
+
+        location /thumb/ {
+            vod thumb;
+            alias /home/files/;
+            add_header Access-Control-Allow-Headers '*';
+            add_header Access-Control-Allow-Origin '*';
+            add_header Access-Control-Allow-Methods 'GET, HEAD, OPTIONS';
+        }
+        location /mp4/ {
+            vod none;
+            alias /home/files/;
+        }
+        # vod status page
+        location /vod_status {
+            vod_status;
+            access_log off;
+        } 
+    }
+}
