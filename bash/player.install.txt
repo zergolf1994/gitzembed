@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -e
+localip=$(hostname -I | awk '{print $1}')
+hostname=$(hostname)
+root_www='/home/node-player-master'
+sudo bash -c 'echo -e "www-data ALL = (root) NOPASSWD:ALL">> /etc/sudoers'
+sudo apt-get update
+sudo apt-get install dos2unix cron zip unzip -y
+#Install NodeJS
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt install -y nodejs
+npm install pm2 -g
+#mkdir -p ${root_www}
+#Download Script
+wget https://github.com/zergolf1994/node-player/archive/refs/heads/master.zip -O /home/player.zip
+sleep 2
+cd /home && unzip player.zip && rm -rf player.zip && cd
+#Create .ENV
+wget http://api.zembed.xyz/install/player/env -O ${root_www}/.env
+#Run Script
+chown www-data:www-data -R ${root_www}
+cd ${root_www} && npm install &&  pm2 start cluster.js --name=node-player-master

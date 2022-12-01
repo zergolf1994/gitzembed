@@ -1,0 +1,12 @@
+pm2 delete node-player-master
+rm -rf /home/node-player-master
+#Download Script
+wget https://github.com/zergolf1994/node-player/archive/refs/heads/master.zip -O /home/player.zip
+sleep 2
+cd /home && unzip player.zip && rm -rf player.zip && cd
+#Create .ENV
+wget http://api.zembed.xyz/install/player/env -O ${root_www}/.env
+#Run Script
+chown www-data:www-data -R ${root_www}
+cd ${root_www} && npm install &&  pm2 start cluster.js --name=node-player-master
+pm2 log

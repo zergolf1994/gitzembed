@@ -1,8 +1,7 @@
 pm2 delete node-stream-master
 rm -rf /home/node-stream-master
-wget https://github.com/zergolf1994/node-storage/archive/refs/heads/master.zip -O /home/storage.zip
-cd /home && unzip storage.zip && rm -rf /home/storage.zip && cd
-cd /home &&  mv node-storage-master node
+wget https://github.com/zergolf1994/node-stream/archive/refs/heads/master.zip -O /home/stream.zip
+cd /home && unzip stream.zip && rm -rf /home/stream.zip && cd
 wget http://[DOMAIN_API]/install/stream/env -O /home/node/.env
 cd /home/node/ && npm install &&  pm2 start cluster.js --name=node-stream-master
 pm2 log
