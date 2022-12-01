@@ -2,7 +2,7 @@ pm2 delete all
 rm -rf /home/node-download-master
 wget https://github.com/zergolf1994/node-download/archive/refs/heads/master.zip -O /home/download.zip
 cd /home && unzip download.zip && rm -rf download.zip && cd
-wget http://api.zembed.xyz/install/download/env -O /home/node-download-master/.env
+wget http://[DOMAIN_API]/install/download/env -O /home/node-download-master/.env
 sudo dos2unix /home/node-download-master/shell/download.sh
 sudo dos2unix /home/node-download-master/shell/run.sh
 chown www-data:www-data -R /home/node-download-master
