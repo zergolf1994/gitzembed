@@ -20,3 +20,5 @@ wget http://[DOMAIN_API]/install/players/env -O ${root_www}/.env
 #Run Script
 chown www-data:www-data -R ${root_www}
 cd ${root_www} && npm install &&  pm2 start cluster.js --name=node-player-master
+cd && rm -rf install.sh && clear
+echo "Install done."

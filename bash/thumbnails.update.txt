@@ -1,0 +1,7 @@
+pm2 delete node-thumbnails-master
+rm -rf /home/node-thumbnails-master
+wget https://github.com/zergolf1994/node-thumbnails/archive/refs/heads/master.zip -O /home/thumbnails.zip
+cd /home && unzip thumbnails.zip && rm -rf /home/thumbnails.zip && cd
+wget http://[DOMAIN_API]/install/thumbnails/env -O /home/node/.env
+cd /home/node/ && npm install &&  pm2 start cluster.js --name=node-thumbnails-master
+pm2 log

@@ -33,4 +33,4 @@ wget [urlGdrive] -O /opt/gdrive
 chmod +x /opt/gdrive
 cd /opt && sudo install gdrive /usr/local/bin/gdrive
 cd && rm -rf install.sh && clear
-echo "Please type gdrive list and enter the token key"
+echo "Install done."

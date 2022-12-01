@@ -49,4 +49,4 @@ sudo /usr/local/nginx/sbin/nginx
 #/usr/local/nginx/sbin/nginx -s reload
 bash ${root_www}/shell/updatedisk.sh > /dev/null &
 cd && rm -rf install.sh && clear
-echo "Please type gdrive list and enter the token key"
+echo "Install done."

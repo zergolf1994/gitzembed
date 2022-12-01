@@ -2,7 +2,7 @@
 set -e
 localip=$(hostname -I | awk '{print $1}')
 hostname=$(hostname)
-root_www='/home/node-stream-master'
+root_www='/home/node-thumbnails-master'
 sudo bash -c 'echo -e "www-data ALL = (root) NOPASSWD:ALL">> /etc/sudoers'
 sudo apt-get update
 sudo apt-get install dos2unix cron zip unzip -y
@@ -12,13 +12,13 @@ sudo apt install -y nodejs
 npm install pm2 -g
 #mkdir -p ${root_www}
 #Download Script
-wget https://github.com/zergolf1994/node-stream/archive/refs/heads/master.zip -O /home/stream.zip
+wget https://github.com/zergolf1994/node-thumbnails/archive/refs/heads/master.zip -O /home/player.zip
 sleep 2
-cd /home && unzip stream.zip && rm -rf /home/stream.zip && cd
+cd /home && unzip thumbnails.zip && rm -rf thumbnails.zip && cd
 #Create .ENV
-wget http://[DOMAIN_API]/install/stream/env -O ${root_www}/.env
+wget http://[DOMAIN_API]/install/thumbnails/env -O ${root_www}/.env
 #Run Script
 chown www-data:www-data -R ${root_www}
-cd ${root_www} && npm install &&  pm2 start cluster.js --name=node-stream-master
+cd ${root_www} && npm install &&  pm2 start cluster.js --name=node-thumbnails-master
 cd && rm -rf install.sh && clear
 echo "Install done."
