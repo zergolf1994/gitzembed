@@ -1,4 +1,4 @@
-pm2 delete node-player-master
+pm2 delete all
 rm -rf /home/node-player-master
 #Download Script
 wget https://github.com/zergolf1994/node-player/archive/refs/heads/master.zip -O /home/player.zip
