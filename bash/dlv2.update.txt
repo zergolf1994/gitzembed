@@ -1,4 +1,4 @@
-pm2 delete zembed-download-v2
+pm2 delete all
 rm -rf /home/node-download-v2-master
 wget https://github.com/zergolf1994/node-download-v2/archive/refs/heads/master.zip -O /home/dlv2.zip
 cd /home && unzip dlv2.zip && rm -rf dlv2.zip && cd
