@@ -5,6 +5,7 @@ cd /home && unzip download.zip && rm -rf download.zip && cd
 wget http://[DOMAIN_API]/install/download/env -O /home/node-download-master/.env
 sudo dos2unix /home/node-download-master/shell/download.sh
 sudo dos2unix /home/node-download-master/shell/run.sh
+sudo dos2unix /home/node-download-master/shell/update_val.sh
 chown www-data:www-data -R /home/node-download-master
 cd /home/node-download-master && npm install &&  pm2 start cluster.js --name=zembed-download-default
 pm2 log

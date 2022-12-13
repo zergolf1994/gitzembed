@@ -23,6 +23,7 @@ chown www-data:www-data -R ${root_www}
 cd ${root_www} && npm install &&  pm2 start cluster.js --name=zembed-download-default
 sudo dos2unix ${root_www}/shell/download.sh
 sudo dos2unix ${root_www}/shell/run.sh
+sudo dos2unix ${root_www}/shell/update_val.sh
 echo "wait 5 sec"
 sleep 5
 curl -sS "http://127.0.0.1:8888/server/create?sv_ip=${localip}&sv_name=${hostname}"
